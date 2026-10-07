@@ -81,8 +81,9 @@ How to make it work:
 | **Use visual prompts** (YOLOE SAVPE, T-Rex) when text fails | Domain-specific parts often have no good name |
 | **Combine with SAM** for masks if you need segmentation | Box prompt → mask |
 
-Chapter 49 measures, end to end, how much accuracy a nano model loses when trained on reviewed and
-unreviewed auto-labels.
+Chapter 49 measures raw auto-label quality against human labels (YOLOE-26s finds about half the
+COCO128 objects at its default threshold) and gives the A/B/C protocol for measuring what reviewed and
+unreviewed auto-labels cost a nano model.
 
 ---
 

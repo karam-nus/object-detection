@@ -175,7 +175,7 @@ large ones, and the middle level was mostly costing head compute.
   wide channels. In YOLO26n the head section (neck + detect) of the YAML has as many C3k2 blocks as the
   backbone.
 - **Memory traffic.** Upsample + concat operations move whole feature maps through memory. On
-  bandwidth-limited edge chips they can cost more than their FLOPs suggest (Chapter 46).
+  bandwidth-limited edge chips they can cost more than their FLOPs suggest (Chapter 44).
 - **Export.** Nearest-neighbour upsampling and concatenation are universally supported. Learned
   weights (BiFPN), attention (AIFI, gather-and-distribute) and custom ops (hypergraph message passing)
   narrow the set of runtimes that run the model fast.

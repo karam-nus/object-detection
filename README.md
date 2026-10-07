@@ -18,9 +18,9 @@ The authoring standard is checked in at [PROMPT.md](./PROMPT.md).
 <div class="diagram">
 <div class="diagram-grid cols-4">
   <div class="diagram-card accent"><div class="card-icon">🧪</div><div class="card-title">Interactive labs</div><div class="card-desc">Drag boxes and watch IoU, GIoU, DIoU and CIoU move. Step NMS one box at a time. Build a PR curve and get AP three ways. See which grid points can "see" a tiny object.</div></div>
-  <div class="diagram-card green"><div class="card-icon">🗺️</div><div class="card-title">Detection Atlas</div><div class="card-desc">More than 130 detectors in one filterable dataset: AP, latency, parameters, pre-training, license, NMS. Only like-for-like latencies share an axis.</div></div>
+  <div class="diagram-card green"><div class="card-icon">🗺️</div><div class="card-title">Detection Atlas</div><div class="card-desc">144 detectors in one filterable dataset: AP, latency, parameters, pre-training, license, NMS. Only like-for-like latencies share an axis.</div></div>
   <div class="diagram-card purple"><div class="card-icon">🧩</div><div class="card-title">The YOLO Matrix</div><div class="card-desc">Eleven orthogonal axes: data, augmentation, architecture, assignment and loss, recipe, tuning, metrics, performance, usability and licensing, export, novel ideas. One chapter per axis, every version compared on each.</div></div>
-  <div class="diagram-card cyan"><div class="card-icon">✅</div><div class="card-title">Tested companion code</div><div class="card-desc"><code>code/odlab</code>: IoU family, NMS variants, COCO mAP (identical to pycocotools to 1e-6), five label assigners, a trainable TinyYOLO with DFL or NMS-free heads, and 32 passing tests.</div></div>
+  <div class="diagram-card cyan"><div class="card-icon">✅</div><div class="card-title">Tested companion code</div><div class="card-desc"><code>code/odlab</code>: IoU family, NMS variants, COCO mAP (identical to pycocotools to 1e-6), five label assigners, a trainable TinyYOLO with DFL or NMS-free heads, and 32 passing tests. Plus the scripts behind every number the book measured itself (<code>tools/measurements</code>).</div></div>
 </div>
 </div>
 
@@ -172,6 +172,9 @@ python -m odlab.train --epochs 30 --reg-max 1 --end2end   # YOLO26-style: no DFL
 ```
 
 See [code/README.md](https://github.com/karam-nus/object-detection/blob/main/code/README.md) for the module ↔ chapter map.
+The measurement scripts (model anatomy, evaluator comparison, bootstrap intervals, ONNX export, CPU
+pipeline timings, INT8 post-training quantisation, auto-label quality) are in
+[tools/measurements](https://github.com/karam-nus/object-detection/blob/main/tools/measurements/README.md).
 
 ---
 

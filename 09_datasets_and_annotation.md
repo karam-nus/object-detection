@@ -196,8 +196,8 @@ flexible:
    bottom shelf") that closed vocabularies cannot express.
 
 The resulting labels are then used to train a small, fast detector, a pattern called **auto-labelling
-→ distillation**. Chapter 49 runs it end to end and measures how much accuracy is lost relative to
-human labels.
+→ distillation**. Chapter 49 walks through it end to end, measures how good the auto-labels are against human labels,
+and gives the protocol for measuring what they cost in final accuracy.
 
 **Active learning** decides *which* images to send for labelling: the model's most uncertain images,
 images where two models disagree, or images from deployment where the system was later found to have

@@ -232,7 +232,7 @@ deployment but **labelling**:
 </div>
 </div>
 
-Chapter 49 runs this end to end and measures what is lost against human labels.
+Chapter 49 walks through this end to end and measures auto-label quality against human labels.
 
 ---
 

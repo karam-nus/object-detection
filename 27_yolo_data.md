@@ -171,7 +171,8 @@ for r in model.predict("unlabelled/", conf=0.35, stream=True):
 
 Treat these as **pre-labels**. Review them in CVAT or Label Studio, fix misses (open-vocabulary
 models under-detect small and unusual objects) and remove false positives before training. Chapter 49
-measures what auto-labels cost in final accuracy.
+measures auto-label precision and recall against human labels (about half the objects are missed at
+the default threshold) and gives the protocol for measuring the cost in final accuracy.
 
 ---
 

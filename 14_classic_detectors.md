@@ -179,7 +179,7 @@ boxes and pose. Its centroid view lives on in MCU detectors that output only obj
 EfficientDet's **compound scaling** grows input resolution, BiFPN depth/width and backbone together
 with one coefficient. It was the FLOP-efficiency leader in 2020. It also became the textbook example
 that **FLOPs do not predict GPU latency**: depthwise convolutions and many small layers are
-memory-bound, so YOLOv4/v5 at higher FLOPs ran faster on the same GPU (Chapter 46).
+memory-bound, so YOLOv4/v5 at higher FLOPs ran faster on the same GPU (Chapters 44 and 46).
 
 ---
 
