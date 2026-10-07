@@ -111,6 +111,10 @@ iteration.
 3. **Dynamic $k$**: $k_j = \max\!\left(1, \left\lfloor \sum \text{top-10 IoUs of } g_j \right\rfloor\right)$.
 4. Each $g_j$ takes its $k_j$ lowest-cost candidates. A candidate claimed twice goes to the cheaper object.
 
+These are the paper's settings. The current YOLOX code is stricter: candidates must lie within
+$1.5 \times s_l$ of the object centre (the inside-the-box condition is gone) and the out-of-region
+penalty is $10^6$.
+
 **Why dynamic $k$ works.** The sum of the best IoUs estimates how many *good* predictions an object
 already has. A large, well-predicted car whose top-10 IoUs are
 $\{0.82, 0.78, 0.71, 0.66, 0.52, 0.40, 0.31, 0.22, 0.15, 0.08\}$ (sum 4.65) gets $k = 4$. A partly
@@ -226,7 +230,7 @@ preview claims to cut this to 0.4 AP on N and S with a training-only "foreground
 | **Max-IoU** | static | variable, often 0–1 for tiny objects | $\tau_{pos}, \tau_{neg}$ | Faster R-CNN, SSD, RetinaNet | Legacy two-stage pipelines |
 | **FCOS ranges** | static | ∝ area | level ranges, radius | FCOS | Simple anchor-free baselines |
 | **ATSS** | static, adaptive | adaptive | $k$ (insensitive) | ATSS, GFL, PP-YOLOE (warm-up), PicoDet | Strong static baseline; early training of dynamic assigners |
-| **SimOTA** | dynamic | dynamic $k$ | radius 2.5, IoU weight 3 | YOLOX, YOLOv6 (early), DAMO-YOLO (AlignedOTA), RTMDet (dynamic soft label) | Fast convergence with prediction-aware cost |
+| **SimOTA** | dynamic | dynamic $k$ | radius 2.5 (1.5 in current code), IoU weight 3 | YOLOX, YOLOv6 (early), DAMO-YOLO (AlignedOTA), RTMDet (dynamic soft label) | Fast convergence with prediction-aware cost |
 | **TAL** | dynamic | top-$k$ = 10 | $\alpha, \beta, k$ | TOOD, YOLOv6 3.0, YOLOv8, YOLO11, YOLO26, PP-YOLOE | The modern YOLO default |
 | **Hungarian** | dynamic, one-to-one | exactly 1 | cost weights | DETR family, D-FINE, RF-DETR | NMS-free, query-based |
 | **Dual (o2m + o2o)** | dynamic | 10 for training head, 1 for deployed head | as TAL + schedule | YOLOv10, YOLO26 | NMS-free deployment of dense CNN detectors |
