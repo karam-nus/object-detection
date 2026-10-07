@@ -159,7 +159,26 @@ book's TinyYOLO (Chapter 39) measures the size of that noise against a real hype
 learning rates, three seeds each, with identical data. Each run is 12 epochs on 768 synthetic training
 images, scored on the same 128 validation images.
 
-<!-- SEED_LR_TABLE -->
+| Learning rate (AdamW) | AP, seeds 0 / 1 / 2 | Mean AP | Seed std | Seed range | Mean APs |
+|---|---|---|---|---|---|
+| 5e-4 | 0.679 / 0.670 / 0.675 | 0.675 | 0.004 | 0.008 | 0.538 |
+| **2e-3** | 0.760 / 0.760 / 0.749 | **0.756** | 0.007 | 0.012 | **0.676** |
+| 8e-3 | 0.735 / 0.711 / 0.735 | 0.727 | **0.014** | **0.024** | 0.650 |
+
+What it shows:
+
+- **The real effect is large relative to noise here.** Moving from 5e-4 to 2e-3 gains 8 AP points,
+  about ten times the seed spread. No statistics are needed to see it.
+- **The 2e-3 vs 8e-3 comparison is closer.** The means differ by 2.9 points, but the 8e-3 seeds span
+  2.4 points on their own. A single run of each could have shown a gap anywhere from about 1.4 to 4.9
+  points. With one run per setting, a tuner could rank them correctly or not.
+- **Too-high learning rates increase variance.** The seed spread at 8e-3 is twice that at 2e-3. That is a
+  useful diagnostic: when repeated runs of a setting disagree, it is often near an instability.
+- **Small-object AP is noisier than overall AP** (APs seed std up to 0.021), and it is the metric most
+  hurt by a too-low learning rate on this short schedule.
+
+This is a 3M-parameter model on synthetic data with a 128-image validation set. Real datasets with
+fewer, harder objects per image tend to have larger seed spreads, not smaller ones.
 
 How to use measurements like these:
 
@@ -255,7 +274,7 @@ with few such signs.</details>
 | Hyperband / ASHA | Li et al., 2018; Li et al., 2020 | arXiv:1603.06560; arXiv:1810.05934 | Early stopping of trials, proxy bias |
 | CMA-ES tutorial | Hansen, 2016 | arXiv:1604.00772 | Covariance-guided mutation |
 | Accounting for variance in ML benchmarks | Bouthillier et al., 2021 | arXiv:2103.03098 | Seed variance, comparing means |
-| `odlab` LR × seed experiment | this book | code/odlab | Measured noise vs effect |
+| `odlab` LR × seed experiment | this book | `tools/measurements/seed_lr.py` | Measured noise vs effect |
 
 ---
 

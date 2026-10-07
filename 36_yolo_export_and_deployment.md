@@ -66,7 +66,15 @@ get boxes straight out of the graph.
 Exported with Ultralytics 8.4.174, ONNX opset 18, `imgsz=640`, static batch 1, from the official
 checkpoints:
 
-<!-- EXPORT_TABLE -->
+| Export | Output shape | ONNX nodes | File size | Notable operators |
+|---|---|---|---|---|
+| YOLO26n, `nms=None` (one-to-many) | (1, 84, 8400) | 368 | 9.9 MB | MatMul ×4, Softmax ×2 (attention blocks) |
+| YOLO26n, `nms=False` (one-to-one) | (1, 300, 6) | 384 | 9.9 MB | + TopK ×2, GatherElements ×3, ReduceMax, Mod |
+| YOLO26n, `nms=True` (embedded NMS) | (1, 300, 6) | 418 | 10.0 MB | + **NonMaxSuppression**, ArgMax, Gather ×9 |
+| YOLO11n, `nms=None` | (1, 84, 8400) | 320 | 10.7 MB | MatMul ×2, Softmax ×2 (one is DFL) |
+| YOLO11n, `nms=True` | (1, 300, 6) | 370 | 10.8 MB | + NonMaxSuppression |
+
+The ONNX files are FP32, about twice the size of the FP16 `.pt` checkpoints (5.5–5.6 MB).
 
 Three practical consequences:
 
@@ -144,7 +152,28 @@ by more than about 0.01. It catches colour-order, letterbox and precision bugs b
 YOLO26n and YOLO11n ONNX models, ONNX Runtime on 4 cores of an Intel Xeon @ 2.3 GHz (a cloud VM, not a
 tuned benchmark machine), median of 30 runs, on two real images:
 
-<!-- POSTPROC_TABLE -->
+| Stage | bus.jpg (810 × 1080) | zidane.jpg (1280 × 720) |
+|---|---|---|
+| Preprocess (letterbox, RGB, /255, CHW) | 4.7 ms | 3.0 ms |
+| YOLO26n inference, one-to-many graph | 22.2 ms | 22.5 ms |
+| YOLO26n inference, one-to-one graph (includes top-k) | 22.8 ms | 23.3 ms |
+| YOLO11n inference | 29.9 ms | 29.7 ms |
+| Post-processing for raw output at conf 0.25 (decode + NMS) | 1.1 ms (48 candidates) | 1.2 ms (28 candidates) |
+| Post-processing for raw output at conf 0.001 | 1.5 ms (620 candidates) | 1.3 ms (330 candidates) |
+| Post-processing for one-to-one output | 0.01 ms | 0.01 ms |
+| Detections at conf 0.25: one-to-many + NMS vs one-to-one | 5 vs 5, same classes, mean IoU 0.97 | 3 vs 3, same classes, mean IoU 0.98 |
+
+What the numbers say:
+
+- **YOLO26n is 26% faster than YOLO11n here** (22.2 vs 29.9 ms), close to the 31% in Ultralytics'
+  CPU table.
+- **Pre- and post-processing are about 20% of the total** for a nano model on a CPU: 4.7 + 1.1 ms around
+  a 22 ms forward pass. On a GPU, where the forward pass takes 1–2 ms, the same host code would dominate.
+- **On this CPU the in-graph top-k costs about what host NMS does** (+0.6 ms vs +1.1 ms). Most of the
+  host cost is the transpose and per-class max over the 84 × 8,400 tensor, not NMS itself. The
+  one-to-one head's advantage grows where NMS is expensive: many candidates, weak CPUs, or NPUs that
+  cannot run it.
+- **The two YOLO26 heads agree** on these images: same objects, same classes, boxes at IoU 0.97–0.98.
 
 ---
 
@@ -160,7 +189,7 @@ tuned benchmark machine), median of 30 runs, on two real images:
 | Qualcomm Snapdragon NPU | QNN (`qnn`) | One-to-many path; NMS on the CPU |
 | Rockchip NPU | RKNN (`rknn`) | One-to-many path; quantisation with calibration data |
 | Hailo | `hailo` | YOLO26 exports raw tensors with host NMS by default; `nms=False` selects the one-to-one path |
-| Sony IMX500 (camera with on-sensor AI) | `imx` | Embedded NMS required |
+| Sony IMX500 (camera with on-sensor AI) | `imx` | Embedded NMS required; the export table lists YOLOv8n and YOLO11n as supported |
 | Edge TPU | `edgetpu` | Full INT8; one-to-many path |
 | Axelera, DEEPX, Huawei Ascend, AMD Xilinx | `axelera`, `deepx`, `ascend`, `xilinx` | Vendor toolchains; check per-model support |
 
@@ -248,7 +277,7 @@ which needs host-side NMS.</details>
 | Ultralytics `cfg/default.yaml` | Ultralytics | github.com/ultralytics/ultralytics | `quantize`, `dynamic`, `simplify`, `opset` |
 | ONNX operator specs (`NonMaxSuppression`, `TopK`) | ONNX | onnx.ai | Graph operators |
 | ONNX Runtime | Microsoft | onnxruntime.ai | CPU measurements |
-| Measurements in this chapter | this book | `export_study.py`, `postproc_study.py` | Graph contents, CPU timings, head agreement |
+| Measurements in this chapter | this book | `tools/measurements/export_study.py`, `tools/measurements/postproc_study.py` | Graph contents, CPU timings, head agreement |
 
 ---
 

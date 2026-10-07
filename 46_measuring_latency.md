@@ -57,7 +57,18 @@ YOLO26n and YOLO11n exported to ONNX (opset 18), ONNX Runtime with 4 intra-op th
 @ 2.3 GHz cloud VM, two real images, median of 30 runs. Pre- and post-processing are the NumPy/OpenCV
 code from Chapter 36. NMS is torchvision's batched NMS.
 
-<!-- MEASURED_PIPELINE -->
+| Stage | YOLO26n, one-to-one (`nms=False`) | YOLO26n, one-to-many + NMS | YOLO11n + NMS |
+|---|---|---|---|
+| Preprocess (bus.jpg, 810 × 1080 → 640) | 4.7 ms | 4.7 ms | 4.7 ms |
+| Forward pass (ONNX Runtime, FP32) | 22.8 ms | 22.2 ms | 29.9 ms |
+| Post-processing at conf 0.25 | 0.01 ms | 1.1 ms | ≈ 1.1 ms |
+| **Total, excluding image decode** | **≈ 27.5 ms** | **≈ 28.0 ms** | **≈ 35.7 ms** |
+| What a model card would report | forward only | forward only | forward only |
+
+Two observations generalise. First, the forward pass is only about 80% of the pipeline for a nano model
+on a CPU, and a card's number covers only that part. Second, the post-processing cost depends on the
+confidence threshold: at conf 0.001 (the validation setting) 620 candidates reached NMS on bus.jpg, at
+0.25 only 48. The full measurements, including a second image, are in Chapter 36.
 
 ---
 
@@ -181,7 +192,7 @@ latency per frame, remove queues, and consider a faster model or motion forecast
 | PyTorch CUDA semantics (asynchronous execution, events) | PyTorch | pytorch.org/docs | Correct GPU timing |
 | Towards Streaming Perception | Li, Wang, Ramanan, 2020 | arXiv:2005.10420 | Latency as part of accuracy |
 | Little's law | Little, 1961 | doi:10.1287/opre.9.3.383 | Frames in flight |
-| Measurements in this chapter | this book | `postproc_study.py`, `export_study.py` | CPU stage timings |
+| Measurements in this chapter | this book | `tools/measurements/postproc_study.py`, `tools/measurements/export_study.py` | CPU stage timings |
 
 ---
 

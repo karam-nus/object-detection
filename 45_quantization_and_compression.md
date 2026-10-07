@@ -60,7 +60,33 @@ activations, MinMax calibration on 64 COCO128 images), evaluated with Ultralytic
 other 64 COCO128 images, on CPU. COCO128 is tiny, so read the numbers for their direction and size, not
 as COCO results.
 
-<!-- INT8_TABLE -->
+| Model and variant | mAP50-95 | mAP50 | CPU latency (ms) | File size (MB) |
+|---|---|---|---|---|
+| YOLO26n FP32 | 0.480 | 0.638 | 22.3 | 9.9 |
+| YOLO26n INT8, **whole graph** | **0.000** | **0.000** | 17.9 | 3.1 |
+| YOLO26n INT8, **head output convs + decoding kept in FP32** | 0.472 (−0.8) | 0.629 | 20.5 | 3.2 |
+| YOLO11n FP32 | 0.497 | 0.654 | 30.6 | 10.7 |
+| YOLO11n INT8, whole graph | **0.000** | **0.000** | 17.5 | 3.2 |
+| YOLO11n INT8, head output convs + DFL + decoding kept in FP32 | 0.485 (−1.2) | 0.651 | 28.7 | 3.4 |
+
+**Why the whole-graph INT8 models score exactly zero.** The exported one-to-many output concatenates
+decoded box coordinates (up to about 660 px) with sigmoid class scores (0–1) in one tensor. Quantised with
+a single 8-bit scale of about 2.6 px per step, every score rounds to the same value: on bus.jpg the FP32
+model produces 5,509 distinct score values with a maximum of 0.90, the whole-graph INT8 model a single
+value, 0.0, while its box coordinates survive. Nothing passes the confidence threshold. Leaving the 6
+final 1×1 head convs and the post-head decoding in FP32 (93–103 graph nodes, all cheap) recovers almost
+everything.
+
+Three further observations:
+
+- **YOLO26n lost less than YOLO11n** (0.8 vs 1.2 points), consistent with the DFL head being the more
+  sensitive design. The difference is within the noise of a 64-image validation set, so treat it as a
+  direction, not a measurement.
+- **INT8 bought little speed on this CPU** (8% and 6%) because ONNX Runtime's QDQ execution on this
+  machine does not have fast INT8 kernels for every layer. Accelerators with native INT8 show the
+  1.2–1.6× speed-ups of Chapter 16's Jetson table. INT8's size reduction (3×) is the same everywhere.
+- COCO128 images come from COCO train2017, which both checkpoints were trained on, so the absolute mAP
+  values are optimistic. Only the FP32 → INT8 changes are meaningful here.
 
 ---
 
@@ -197,7 +223,7 @@ Pruning there shrinks the model file without touching where the time goes.</deta
 | Ultralytics `utils/torch_utils.py` (`prepare_qat`), `utils/export/engine.py` (`modelopt_quantize_onnx`) | Ultralytics | github.com/ultralytics/ultralytics | QAT and INT8 export details |
 | NVIDIA ModelOpt | NVIDIA | github.com/NVIDIA/TensorRT-Model-Optimizer | Quantisation toolkit |
 | ONNX Runtime quantisation | Microsoft | onnxruntime.ai/docs/performance/model-optimizations/quantization.html | Static QDQ quantisation used for the measurements |
-| Measurements in this chapter | this book | `int8_study.py` | PTQ results on YOLO26n/YOLO11n |
+| Measurements in this chapter | this book | `tools/measurements/int8_study.py` | PTQ results on YOLO26n/YOLO11n |
 
 ---
 

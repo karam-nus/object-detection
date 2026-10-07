@@ -55,7 +55,28 @@ Label 100–200 images by hand (the **audit set**) and score the labeller on the
 YOLOE-26s with the 80 COCO class names as text prompts, on the 128 COCO128 images, scored against their
 human labels with `odlab`'s COCO-exact evaluator:
 
-<!-- AUTOLABEL_TABLE -->
+| Labeller threshold | Precision | Recall | Labels produced / human labels | Lowest-recall classes (≥ 5 instances) |
+|---|---|---|---|---|
+| conf 0.10 | 0.46 | 0.58 | 1,176 / 929 | oven 0.00, sports ball 0.00, backpack 0.17, fork 0.17, broccoli 0.18 |
+| conf 0.25 | 0.63 | 0.49 | 723 / 929 | oven 0.00, **bird 0.00 (16)**, sports ball 0.00, carrot 0.08, traffic light 0.14 |
+| conf 0.40 | 0.73 | 0.43 | 549 / 929 | oven 0.00, bird 0.00, sports ball 0.00, carrot 0.04, book 0.07 |
+
+Precision and recall are at IoU 0.5. Over all thresholds the labeller scores **0.40 AP (0.54 AP50)**
+against the human labels.
+
+What this means for training data:
+
+- **At any threshold, roughly half the objects would be missing from unreviewed labels.** At conf 0.25,
+  only 49% of the human-labelled objects are found, so the student would be trained to call the other
+  half background.
+- **The failures are concentrated.** Small and cluttered classes (birds, sports balls, carrots, books,
+  traffic lights) have near-zero recall, while large, common classes do much better. Per-class review is
+  far more efficient than uniform review.
+- **No threshold fixes both errors.** Lowering the threshold to 0.10 raises recall only to 58% while
+  precision falls to 46%. Review, a second labeller, or visual prompts are needed.
+- **Caveat:** YOLOE's pre-training data (Objects365 and grounding datasets) may overlap COCO imagery,
+  which would make these numbers optimistic. On specialised domains, Roboflow100-VL reports far lower
+  zero-shot accuracy for open-vocabulary models.
 
 These numbers are the error rate of your training labels if you skip review. Every miss becomes a
 background example; every false positive becomes a wrong positive.
@@ -165,7 +186,7 @@ right.</details>
 | Roboflow100-VL | Robicheaux et al., 2025 | arXiv:2505.20612 | How open-vocabulary models fail on unusual domains |
 | Ultralytics YOLOE docs | Ultralytics | docs.ultralytics.com/models/yoloe | `set_classes`, export |
 | Chapters 20, 21, 42 | this book | — | Open-vocabulary and VLM detection; auto-labelling practice |
-| Measurement in this chapter | this book | `autolabel_study.py` | Auto-label quality on COCO128 |
+| Measurement in this chapter | this book | `tools/measurements/autolabel_study.py` | Auto-label quality on COCO128 |
 
 ---
 

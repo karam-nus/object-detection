@@ -184,7 +184,7 @@ operators are unsupported or slow there.</details>
 | Arm Ethos-U85 product brief | Arm, 2024 | arm.com | Transformer operators on a micro-NPU |
 | Ultralytics export table and end-to-end guide | Ultralytics, 2026 | docs/macros/export-table.md; docs/en/guides/end2end-detection.md | Per-format head fallbacks |
 | Ultralytics Jetson and Raspberry Pi guides | Ultralytics | docs.ultralytics.com/guides | Edge measurements (Chapter 16) |
-| Measurements in this chapter | this book | `intensity.py` | Arithmetic intensity of YOLO26 n/s/m/x |
+| Measurements in this chapter | this book | `tools/measurements/intensity.py` | Arithmetic intensity of YOLO26 n/s/m/x |
 
 ---
 

@@ -274,7 +274,7 @@ hence AP slightly.</details>
 | faster-coco-eval | MiXaiLL76 | github.com/MiXaiLL76/faster_coco_eval | COCO-compatible evaluator used for published numbers |
 | TIDE | Bolya et al., 2020 | arXiv:2008.08115 | Error decomposition |
 | An Introduction to the Bootstrap | Efron, Tibshirani, 1993 | — | Bootstrap confidence intervals |
-| `odlab/metrics.py` + measurements in this chapter | this book | code/odlab | COCO-exact evaluator; evaluator comparison; bootstrap widths |
+| `odlab/metrics.py` + measurements in this chapter | this book | code/odlab; `tools/measurements/metric_compare.py`, `tools/measurements/bootstrap_ci.py` | COCO-exact evaluator; evaluator comparison; bootstrap widths |
 
 ---
 

@@ -490,6 +490,7 @@ in depth (0.5 vs 1.0), which gives l two repeats per C3k2 where m has one.</deta
 | YOLOv12 | Tian, Ye, Doermann, 2025 | arXiv:2502.12524 | Area attention, R-ELAN |
 | RepVGG | Ding et al., 2021 | arXiv:2101.03697 | Structural re-parameterisation |
 | SPP-Net | He et al., 2015 | arXiv:1406.4729 | Spatial pyramid pooling |
+| Measurements in this chapter | this book | `tools/measurements/shapes.py`, `tools/measurements/flops_by_res.py` | Layer shapes, parameter and MAC splits |
 
 ---
 
