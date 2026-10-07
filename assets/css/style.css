@@ -948,6 +948,12 @@ body {
 .diagram-card.green { border-color: var(--green); }
 .diagram-card.green .card-title { color: var(--green); }
 
+.diagram-card.blue { border-color: var(--blue); }
+.diagram-card.blue .card-title { color: var(--blue); }
+
+.diagram-card.red { border-color: var(--red); }
+.diagram-card.red .card-title { color: var(--red); }
+
 .diagram-card.teal { border-color: var(--teal); }
 .diagram-card.teal .card-title { color: var(--teal); }
 
@@ -1039,6 +1045,7 @@ body {
 .layer.pink { border-color: var(--pink); color: var(--pink); background: rgba(236, 72, 153, 0.08); }
 .layer.yellow { border-color: var(--yellow); color: var(--yellow); background: rgba(234, 179, 8, 0.08); }
 .layer.red { border-color: var(--red); color: var(--red); background: rgba(239, 68, 68, 0.08); }
+.layer.blue { border-color: var(--blue); color: var(--blue); background: rgba(59, 130, 246, 0.08); }
 
 .layer small {
   font-weight: 400;
