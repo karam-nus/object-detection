@@ -1,10 +1,10 @@
 ---
-title: "Chapter 37 — Novel Optimisations"
+title: "Chapter 37 — YOLO Axis 11: Novel Optimisations"
 ---
 
 [← Back to Table of Contents](./README.md)
 
-# Chapter 37 — Novel Optimisations
+# Chapter 37 — YOLO Axis 11: Novel Optimisations
 
 > *"An idea is worth adopting when its ablation survives a different codebase, a different dataset and an INT8 export."*
 

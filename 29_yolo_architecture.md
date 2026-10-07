@@ -353,7 +353,7 @@ Three consequences:
    C3k2 blocks and a lighter head. That explains a large part of the FLOP drop from 8.7 to 5.4 GFLOPs at
    similar accuracy.
 3. **Adding a P2 level is expensive.** `yolo26-p2.yaml` adds an upsample to stride 4 and a fourth Detect
-   input. At 160 × 160 every conv costs 4× its P3 cost, and the point count grows from 8,400 to 33,600
+   input. At 160 × 160 every conv costs 4× its P3 cost, and the point count grows from 8,400 to 34,000 (adding 160 × 160 = 25,600 points)
    (Chapter 41).
 
 ### Measured totals across scales

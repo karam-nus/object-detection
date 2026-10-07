@@ -1,10 +1,10 @@
 ---
-title: "Chapter 35 — YOLO Axis 9: Ease of Use & Licensing"
+title: "Chapter 35 — YOLO Axis 9: Ease of Use, Ecosystem & Licensing"
 ---
 
 [← Back to Table of Contents](./README.md)
 
-# Chapter 35 — YOLO Axis 9: Ease of Use & Licensing
+# Chapter 35 — YOLO Axis 9: Ease of Use, Ecosystem & Licensing
 
 > *"More projects pick a detector for its `pip install` and its licence than for its AP."*
 

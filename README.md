@@ -70,7 +70,7 @@ The authoring standard is checked in at [PROMPT.md](./PROMPT.md).
 | 34 | [Axis 8 — Family Performance](./34_yolo_family_performance.md) | v5u → YOLO26 (+ YOLO27 preview) on one table, Pareto fronts, RF100-VL, and the pre-training asterisk |
 | 35 | [Axis 9 — Ease of Use, Ecosystem & Licensing](./35_yolo_ease_of_use_and_licensing.md) | APIs, CLIs, integrations, AGPL vs GPL vs Apache, and what licensing actually means for your product |
 | 36 | [Axis 10 — Export & Deployment](./36_yolo_export_and_deployment.md) | ONNX, TensorRT, OpenVINO, CoreML, LiteRT, NCNN, RKNN, Hailo; NMS-in-graph vs end-to-end; INT8 pitfalls |
-| 37 | [Axis 11 — Novel Optimizations](./37_yolo_novel_optimizations.md) | Every new idea since 2016, with its mechanism, measured gain and cost: re-param, PGI, dual assignment, MuSGD, STAL, area attention… |
+| 37 | [Axis 11 — Novel Optimisations](./37_yolo_novel_optimizations.md) | The techniques behind the modern YOLOs, each with mechanism, cost and an evidence grade: re-param, PGI, dual assignment, MuSGD, STAL, area attention… |
 | 38 | [YOLO Beyond Boxes](./38_yolo_beyond_boxes.md) | Segmentation, pose (RLE), OBB, classification, YOLO-World/YOLOE and tracking: how one head family grew |
 | 39 | [Hands-On: YOLO From Scratch](./39_yolo_from_scratch.md) | Build, train and evaluate a modern YOLO on a CPU with `odlab`, then flip it to DFL-free and NMS-free |
 | **Part V — Training & Data Strategy** | | |
@@ -80,7 +80,7 @@ The authoring standard is checked in at [PROMPT.md](./PROMPT.md).
 | 43 | [Oriented, 3D, Video & Domain Shift](./43_specialized_detection.md) | OBB maths, crowded scenes, LiDAR/BEV in brief, tracking-by-detection, domain adaptation |
 | **Part VI — Deployment** | | |
 | 44 | [Hardware & Runtimes](./44_hardware_and_runtimes.md) | GPUs, CPUs, mobile and edge NPUs, MCUs; the operator-support matrix; what breaks on which chip |
-| 45 | [Quantizing & Compressing Detectors](./45_quantization_and_compression.md) | Why detectors quantize worse than classifiers, sensitive layers, PTQ/QAT recipes, pruning |
+| 45 | [Quantising & Compressing Detectors](./45_quantization_and_compression.md) | Why detectors quantize worse than classifiers, sensitive layers, PTQ/QAT recipes, pruning |
 | 46 | [Measuring Latency Honestly](./46_measuring_latency.md) | What is in "1.7 ms", pre/post-processing, batch, warm-up, throughput vs latency, a reporting template |
 | 47 | [Detection in Production](./47_production_systems.md) | Pipelines, per-class thresholds, calibration, monitoring, data flywheels, failure review |
 | **Part VII — Practice & Decisions** | | |
@@ -140,7 +140,7 @@ The authoring standard is checked in at [PROMPT.md](./PROMPT.md).
 1. [15 — Very Tiny Detectors](./15_tiny_detectors.md) → [16 — Edge Detectors](./16_edge_detectors.md)
 2. [44 — Hardware & Runtimes](./44_hardware_and_runtimes.md) — what your chip can execute
 3. [36 — YOLO Export & Deployment](./36_yolo_export_and_deployment.md)
-4. [45 — Quantizing Detectors](./45_quantization_and_compression.md)
+4. [45 — Quantising Detectors](./45_quantization_and_compression.md)
 5. [46 — Measuring Latency Honestly](./46_measuring_latency.md)
 
 ### Path C: "I want the highest accuracy, or I'm choosing a transformer detector"

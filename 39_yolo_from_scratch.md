@@ -1,10 +1,10 @@
 ---
-title: "Chapter 39 — Build a YOLO from Scratch"
+title: "Chapter 39 — Hands-On: YOLO From Scratch"
 ---
 
 [← Back to Table of Contents](./README.md)
 
-# Chapter 39 — Build a YOLO from Scratch
+# Chapter 39 — Hands-On: YOLO From Scratch
 
 > *"What I cannot create, I do not understand." — Richard Feynman*
 

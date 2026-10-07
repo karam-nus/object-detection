@@ -252,5 +252,5 @@ which needs host-side NMS.</details>
 
 ---
 
-**Next:** [Chapter 37 — Novel Optimisations](./37_yolo_novel_optimizations.md) — the ideas from 2024–2026
+**Next:** [Chapter 37 — Axis 11: Novel Optimisations](./37_yolo_novel_optimizations.md) — the ideas from 2024–2026
 that changed how YOLOs are built and trained, and what is known about each.

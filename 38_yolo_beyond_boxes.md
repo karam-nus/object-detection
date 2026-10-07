@@ -219,5 +219,5 @@ Pass the detector's low-confidence outputs to the tracker and apply the display 
 
 ---
 
-**Next:** [Chapter 39 — Build a YOLO from Scratch](./39_yolo_from_scratch.md) — every axis of this part in
+**Next:** [Chapter 39 — Hands-On: YOLO From Scratch](./39_yolo_from_scratch.md) — every axis of this part in
 300 lines of PyTorch you can read and run.
