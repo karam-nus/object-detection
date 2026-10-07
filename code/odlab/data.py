@@ -35,7 +35,7 @@ def _draw(img, cls, cx, cy, r, color):
     return (xs.min(), ys.min(), xs.max() + 1, ys.max() + 1)
 
 
-def make_sample(rng: np.random.Generator, size=256, max_objects=6, min_r=4, max_r=48):
+def make_sample(rng: np.random.Generator, size=256, max_objects=6, min_r=4, max_r=72):
     """One image [size, size, 3] uint8 with boxes [N, 4] xyxy float and labels [N]."""
     bg = rng.integers(0, 90)
     img = (rng.normal(bg, 12, (size, size, 3))).clip(0, 255).astype(np.uint8)
