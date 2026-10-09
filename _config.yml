@@ -1,0 +1,170 @@
+title: "Object Detection — The Complete Guide"
+description: "From IoU to YOLO26 and beyond: how machines find, box and name things — tiny MCU detectors to billion-parameter grounding models, with every YOLO axis taken apart."
+baseurl: "/object-detection"
+url: "https://karam-nus.github.io"
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+
+plugins:
+  - jekyll-relative-links
+
+relative_links:
+  enabled: true
+  collections: false
+
+include:
+  - README.md
+
+exclude:
+  - code/
+  - tools/
+  - Gemfile
+  - Gemfile.lock
+
+navigation:
+  - title: "Home"
+    url: "/"
+  - title: "00 — The Whole Field on One Page"
+    url: "/00_grand_overview"
+  - title: "01 — A Short History of Finding Things"
+    url: "/01_history"
+  - title: "02 — The Detection Problem"
+    url: "/02_the_detection_problem"
+  - title: "03 — IoU and Its Family"
+    url: "/03_iou_family"
+  - title: "04 — Anchors, Points, Queries"
+    url: "/04_anchors_points_queries"
+  - title: "05 — Label Assignment"
+    url: "/05_label_assignment"
+  - title: "06 — Losses"
+    url: "/06_losses"
+  - title: "07 — Post-Processing & NMS"
+    url: "/07_post_processing"
+  - title: "08 — Metrics"
+    url: "/08_metrics"
+  - title: "09 — Datasets & Annotation"
+    url: "/09_datasets_and_annotation"
+  - title: "10 — Augmentation"
+    url: "/10_augmentation"
+  - title: "11 — Backbones"
+    url: "/11_backbones"
+  - title: "12 — Necks"
+    url: "/12_necks"
+  - title: "13 — Heads"
+    url: "/13_heads"
+  - title: "14 — Classic Detectors"
+    url: "/14_classic_detectors"
+  - title: "15 — Very Tiny Detectors"
+    url: "/15_tiny_detectors"
+  - title: "16 — Edge Detectors"
+    url: "/16_edge_detectors"
+  - title: "17 — Large Detectors"
+    url: "/17_large_detectors"
+  - title: "18 — DETR & Descendants"
+    url: "/18_detr_family"
+  - title: "19 — Real-Time DETRs & ViTs"
+    url: "/19_realtime_detrs_and_vit"
+  - title: "20 — Open-Vocabulary Detection"
+    url: "/20_open_vocabulary"
+  - title: "21 — LLM-Based Detection"
+    url: "/21_llm_based_detection"
+  - title: "22 — YOLO: The Matrix"
+    url: "/22_yolo_matrix"
+  - title: "23 — YOLO: Family Tree"
+    url: "/23_yolo_family_tree"
+  - title: "24 — YOLOv1–v3"
+    url: "/24_yolo_v1_to_v3"
+  - title: "25 — YOLOv4–v7 & Forks"
+    url: "/25_yolo_v4_to_v7"
+  - title: "26 — YOLOv8 → YOLO26/27"
+    url: "/26_yolo_v8_to_yolo26"
+  - title: "27 — YOLO Axis 1: Data"
+    url: "/27_yolo_data"
+  - title: "28 — YOLO Axis 2: Preprocess & Augment"
+    url: "/28_yolo_preprocessing_augmentation"
+  - title: "29 — YOLO Axis 3: Architecture"
+    url: "/29_yolo_architecture"
+  - title: "30 — YOLO Axis 4: Assignment & Loss"
+    url: "/30_yolo_assignment_and_loss"
+  - title: "31 — YOLO Axis 5: Training Recipe"
+    url: "/31_yolo_training_recipe"
+  - title: "32 — YOLO Axis 6: Hyperparameter Tuning"
+    url: "/32_yolo_hyperparameter_tuning"
+  - title: "33 — YOLO Axis 7: Metrics & Validation"
+    url: "/33_yolo_metrics_and_validation"
+  - title: "34 — YOLO Axis 8: Family Performance"
+    url: "/34_yolo_family_performance"
+  - title: "35 — YOLO Axis 9: Ease of Use & Licensing"
+    url: "/35_yolo_ease_of_use_and_licensing"
+  - title: "36 — YOLO Axis 10: Export & Deploy"
+    url: "/36_yolo_export_and_deployment"
+  - title: "37 — YOLO Axis 11: Novel Optimisations"
+    url: "/37_yolo_novel_optimizations"
+  - title: "38 — YOLO Beyond Boxes"
+    url: "/38_yolo_beyond_boxes"
+  - title: "39 — Hands-On: YOLO From Scratch"
+    url: "/39_yolo_from_scratch"
+  - title: "40 — Training in Practice"
+    url: "/40_training_in_practice"
+  - title: "41 — Small Objects"
+    url: "/41_small_objects"
+  - title: "42 — Label-Efficient & Distillation"
+    url: "/42_label_efficient_and_distillation"
+  - title: "43 — Oriented, 3D, Video, Domain Shift"
+    url: "/43_specialized_detection"
+  - title: "44 — Hardware & Runtimes"
+    url: "/44_hardware_and_runtimes"
+  - title: "45 — Quantising Detectors"
+    url: "/45_quantization_and_compression"
+  - title: "46 — Measuring Latency Honestly"
+    url: "/46_measuring_latency"
+  - title: "47 — Detection in Production"
+    url: "/47_production_systems"
+  - title: "48 — Hands-On: Fine-Tune & Export"
+    url: "/48_handson_finetune_export"
+  - title: "49 — Hands-On: Zero-Shot to Edge"
+    url: "/49_handson_zero_shot_to_edge"
+  - title: "50 — The Debugging Playbook"
+    url: "/50_debugging_playbook"
+  - title: "51 — The Decision Guide"
+    url: "/51_decision_guide"
+  - title: "52 — The Frontier"
+    url: "/52_frontier"
+  - title: "Interactive Labs"
+    url: "/labs"
+  - title: "Detection Atlas"
+    url: "/atlas"
+  - title: "Appendix A — Glossary"
+    url: "/appendix_a_glossary"
+  - title: "Appendix B — Math Reference"
+    url: "/appendix_b_math"
+  - title: "Appendix C — Model Index"
+    url: "/appendix_c_model_index"
+  - title: "Appendix D — Dataset Index"
+    url: "/appendix_d_datasets"
+  - title: "Appendix E — Hardware & Export Matrix"
+    url: "/appendix_e_hardware_export_matrix"
+  - title: "Appendix F — Bibliography"
+    url: "/appendix_f_bibliography"
+  - title: "Appendix G — Question Bank"
+    url: "/appendix_g_question_bank"
+  - title: "Authoring Prompt"
+    url: "/PROMPT"
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
